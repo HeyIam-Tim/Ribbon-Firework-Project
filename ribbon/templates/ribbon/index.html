@@ -3,5 +3,7 @@
 {% block content %}
     {% for ribbon in ribbons %}
         {{ribbon}}
+        <img src="{{ribbon.image.url}}" alt="">
     {% endfor %}
 {% endblock content %}
+
