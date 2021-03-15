@@ -1,0 +1,17 @@
+{% extends 'ribbon/base.html' %}
+
+{% block content %}
+    <section class="register">
+        <div class="card">
+            <form method="POST" action="" class="flex fd-col">
+                <h2>Регистрация</h2>
+                {% csrf_token %}
+                <div class="creden"><p>Имя: </p>{{form.username}}</div>
+                <div class="creden"><p>Пароль: </p>{{form.password1}}</div>
+                <div class="creden"><p>Подтвердить: </p>{{form.password2}}</div>
+                <input type="submit" class="button" value="Создать Аккаунт">
+                <!-- <p>Зарегистрировать Аккаунт<a href="{% url 'login' %}"> Создать</a></p> -->
+            </form>
+        </div>
+    </section>
+{% endblock content %}

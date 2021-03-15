@@ -12,6 +12,7 @@
 
 body {
     background-color: $white-color;
+    color: $dark-color;
     line-height: 1.6;
     font-family: 'Lato', sans-serif;
 }
@@ -33,7 +34,7 @@ a {
     text-decoration: none;
 }
 
-button {
+button, .button {
     display: inline-block;
     border-radius: 5px;
     border: none;
@@ -43,12 +44,12 @@ button {
     outline: none;
 }
 
-button:hover {
+button:hover, .button:hover {
     transform: scale(1.02);
 }
 
 p {
-    font-size: 10px;
+    font-size: $main-font-size;
 }
 
 .navbar {
@@ -58,7 +59,7 @@ p {
     a {
         color: $white-color;
         margin: 0 5px;
-        font-size: 15px;
+        font-size: $main-font-size;
     }
 }
 
@@ -73,7 +74,7 @@ p {
         height: 80px;
 
         p {
-            font-size: 15px;
+            font-size: $main-font-size;
         }
 
         .actions {
@@ -92,12 +93,49 @@ p {
 
 }
 
+.register {
+    margin: 50px auto;
+
+    .card {
+        margin: auto;
+        max-width: 350px;
+        padding: 20px;
+
+        h2 {
+            font-size: 20px;
+            margin: 10px auto;
+        }
+        .button {
+            padding: 10px;
+            margin: 10px auto;
+            margin-top: 20px;
+        }
+
+        .creden {
+            width: 80%;
+            margin: 5px auto;
+
+            p {
+                font-weight: 100;
+                font-size: 13px;
+            }
+
+            input[type='text'],[type='password'] {
+                width: 100%;
+                border: 1px solid rgb(121, 121, 121);
+                border-radius: 5px;
+                height: 30px;
+                padding: 0 10px;
+                outline: none;
+                font-size: $main-font-size;
+
+            }
+        }
+    }
+}
+
 .footer {
     margin: 20px auto;
-
-    p {
-        font-size: 15px;
-    }
 }
 
 

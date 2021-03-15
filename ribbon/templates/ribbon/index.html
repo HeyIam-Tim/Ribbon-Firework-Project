@@ -11,9 +11,11 @@
                     <div class="flex jc-sb actions">
                         <div class="cta">
                             <button>Купить</button>
+                            {% if request.user.is_authenticated %}
                             <button class="card">Корзина</button>
+                            {% endif %}
                         </div>
-                        <h3>{{ribbon.price}}</h3>
+                        <h3>{{ribbon.price}} p</h3>
                     </div>
                 </div>
             </div>
