@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>Ribbon</title>
 </head>
+<header>
+    {% include 'ribbon/navbar.html' %}
+</header>
 <body>
     <div class="container">
         {% block content %}
@@ -14,4 +17,7 @@
         {% endblock content %}
     </div>
 </body>
+<footer>
+    {% include 'ribbon/footer.html' %}
+</footer>
 </html>

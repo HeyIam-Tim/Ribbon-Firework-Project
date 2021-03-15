@@ -1,0 +1,14 @@
+@media(max-width: 700px) {
+    .navbar {
+        height: 90px;
+
+        .flex {
+            flex-direction: column;
+            justify-content: space-evenly;
+
+            h1 {
+                font-size: 22px;
+            }
+        }
+    }   
+} 

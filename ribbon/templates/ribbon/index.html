@@ -1,9 +1,25 @@
 {% extends 'ribbon/base.html' %}
 
 {% block content %}
-    {% for ribbon in ribbons %}
-        {{ribbon}}
-        <img src="{{ribbon.image.url}}" alt="">
-    {% endfor %}
+<section class="showcase">
+    <div class="grid">
+        {% for ribbon in ribbons %}
+            <div class="card">
+                <img src="{{ribbon.image.url}}" alt="">
+                <div class="options flex fd-col">
+                    <p>{{ribbon.ribbon_name}}</p>
+                    <div class="flex jc-sb actions">
+                        <div class="cta">
+                            <button>Купить</button>
+                            <button class="card">Корзина</button>
+                        </div>
+                        <h3>{{ribbon.price}}</h3>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
 {% endblock content %}
 

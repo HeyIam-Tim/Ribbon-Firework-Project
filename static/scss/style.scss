@@ -1,7 +1,106 @@
-body {
-    background-color: red;
+@import 'variables';
+@import 'utility';
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
-.container {
-    background-color: green;
+body {
+    background-color: $white-color;
+    line-height: 1.6;
+    font-family: 'Lato', sans-serif;
 }
+
+img {
+    width: 100%;
+}
+
+h1 {
+    font-size: 20px;
+    color: $white-color;
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    display: inline-block;
+    border-radius: 5px;
+    border: none;
+    background-color: $green-color;
+    color: $white-color;
+    cursor: pointer;
+    outline: none;
+}
+
+button:hover {
+    transform: scale(1.02);
+}
+
+p {
+    font-size: 10px;
+}
+
+.navbar {
+    background-color: $green-color;
+    height: 70px;
+    
+    a {
+        color: $white-color;
+        margin: 0 5px;
+        font-size: 15px;
+    }
+}
+
+.showcase {
+    margin: 40px auto;
+
+    img {
+        border-radius: 5px 5px 0 0;
+    }
+
+    .options {
+        height: 80px;
+
+        p {
+            font-size: 15px;
+        }
+
+        .actions {
+            padding: 0 20px;
+
+            .card {
+                background-color: $yellow-color;
+            }
+        }
+    }
+
+    button {
+        padding: 10px;
+    }
+
+
+}
+
+.footer {
+    margin: 20px auto;
+
+    p {
+        font-size: 15px;
+    }
+}
+
+
+
+// Mobile and Tablet
+@import 'mobile';
