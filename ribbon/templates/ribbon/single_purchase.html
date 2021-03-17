@@ -14,7 +14,7 @@
             <div class="purchase">
                 <div class="card flex fd-col">
                     <form action="" method="post">
-                        <div class="get_quantity flex fd-row jc-se">
+                        <div class="get_quantity flex fd-row">
                             <img src="{{ribbon.image.url}}" alt="ribbon-img">
                             <h4>{{ribbon.ribbon_name}}</h4>
                             <h4>{{ribbon.price}} p</h4>
@@ -22,15 +22,15 @@
                         </div>
                         <br>
                         {% csrf_token %}
-                        <p>customer_name {{form.customer_name}}</p>
-                        <p>phone {{form.phone}}</p>
-                        <p>city {{form.city}}</p>
-                        <p>street {{form.street}}</p>
-                        <p>building {{form.building}}</p>
-                        <p>apartment {{form.apartment}}</p>
-                        <p>region {{form.region}}</p>
-                        <p>zip_code {{form.zip_code}}</p>
-                        <input type="submit" value="submit">                        
+                        <p>ФИО: {{form.customer_name}}</p>
+                        <p>Телефон: {{form.phone}}</p>
+                        <p>Город: {{form.city}}</p>
+                        <p>Улица: {{form.street}}</p>
+                        <p>Дом: {{form.building}}</p>
+                        <p>Квартира: {{form.apartment}}</p>
+                        <!-- <p>region {{form.region}}</p> -->
+                        <!-- <p>Индекс: {{form.zip_code}}</p> -->
+                        <input type="submit" value="Сделать Заказ">                        
                     </form>
                 </div>
             </div>

@@ -154,25 +154,35 @@ input[type='text'], input[type='password'] {
     margin: 50px auto;
 
     .ribbon_info {
-        width: 57%;
+        width: 49%;
 
         a {color: $green-color;}
     }
 
     .purchase {
-        width: 41%;
+        width: 49%;
 
         .card {
-            // width: 100%;
-            max-width: 350px;
+            width: 80%;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
+
+            p {font-size: 13px;
+            font-weight: 100;}
             
             .get_quantity {
+
+                width: 100%;
 
                 img {
                     width: 80px;
                 }
+
+                h4 {margin: 5px;
+                font-weight: 300;}
+                p {margin: 5px;
+                    font-weight: 700;
+                font-size: 16px;}
 
                 input[type='text'] {
                     width: 40px;
