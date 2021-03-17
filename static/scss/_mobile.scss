@@ -14,5 +14,28 @@
                 font-size: 22px;
             }
         }
-    }   
+    }  
+    
+    .single_purchase {
+    
+        .flex {
+            flex-direction: column;
+
+            .flex {flex-direction: row;}
+            
+            .ribbon_info {
+                width: 90%;
+                order: 2;
+                margin: 0 auto;
+    
+                img {display: none;}
+            }
+    
+            .purchase {
+                width: 100%;
+                order: 1;
+            }
+        }
+
+    }
 } 

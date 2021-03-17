@@ -20,6 +20,7 @@ body {
 
 img {
     width: 100%;
+    border-radius: 5px;
 }
 
 h1 {
@@ -50,6 +51,16 @@ button:hover, .button:hover {
 }
 
 p {
+    font-size: $main-font-size;
+}
+
+input[type='text'], input[type='password'] {
+    width: 100%;
+    border: 1px solid rgb(121, 121, 121);
+    border-radius: 5px;
+    height: 30px;
+    padding: 0 10px;
+    outline: none;
     font-size: $main-font-size;
 }
 
@@ -130,20 +141,45 @@ p {
                 font-size: 13px;
             }
 
-            input[type='text'],[type='password'] {
-                width: 100%;
-                border: 1px solid rgb(121, 121, 121);
-                border-radius: 5px;
-                height: 30px;
-                padding: 0 10px;
-                outline: none;
-                font-size: $main-font-size;
-
-            }
         }
 
         a {
             color: $green-color;
+        }
+    }
+}
+
+.single_purchase {
+    width: 100%;
+    margin: 50px auto;
+
+    .ribbon_info {
+        width: 57%;
+
+        a {color: $green-color;}
+    }
+
+    .purchase {
+        width: 41%;
+
+        .card {
+            // width: 100%;
+            max-width: 350px;
+            margin: 0 auto;
+            padding: 20px;
+            
+            .get_quantity {
+
+                img {
+                    width: 80px;
+                }
+
+                input[type='text'] {
+                    width: 40px;
+                }
+
+            }
+
         }
     }
 }

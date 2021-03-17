@@ -1,6 +1,8 @@
+# pylint: disable=E1101
 from django.shortcuts import render, redirect
 
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, FormView
 
 from django.urls import reverse_lazy
@@ -10,7 +12,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 
-from .models import Ribbon, OrderInfo
+from .models import Ribbon, OrderInfo, OrderItem
 
 
 class RibbonList(ListView):
@@ -21,13 +23,35 @@ class RibbonList(ListView):
 
 class RibbonCreate(CreateView):
     model = OrderInfo
-    fields = '__all__'
+    template_name = 'ribbon/single_purchase.html'
+    fields = ['customer_name', 'phone', 'city', 'street', 'building', 'apartment', 'region', 'zip_code']
     success_url = reverse_lazy('index')
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(RibbonCreate, self).form_valid(form)
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            form.instance.user = self.request.user
+            order_info = form.save()
+            print('ORDERINFO: ', order_info)
+            pk = self.kwargs.get(self.pk_url_kwarg)
+            ribbon = Ribbon.objects.get(id=pk)
+            print('RIBBON: ', ribbon)
+            quantity = self.request.POST.get('quantity')
+            order_item = OrderItem(order_info=order_info, ribbon_name=ribbon.ribbon_name, image=ribbon.image, price=ribbon.price, quantity=quantity)
+            order_item.item_total = order_item.get_total
+            order_item.save()
+            print('ITEMTOTAL: ', order_item.item_total)
+            print('ORDERITEM: ', order_item)
+            order_info.order_total = order_info.get_order_total
+            print('ORDERTOTAL: ', order_info.order_total)
+            return self.form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        ribbon = Ribbon.objects.get(id=pk)
+        context['ribbon'] = ribbon
+        return context
 
 
 class RegisterPage(FormView):

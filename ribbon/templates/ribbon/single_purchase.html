@@ -1,0 +1,40 @@
+{% extends 'ribbon/base.html' %}
+
+{% block content %}
+
+    <section class="single_purchase">
+        <div class="flex fd-row jc-se">
+            <div class="ribbon_info">
+                <img src="{{ribbon.image.url}}" alt="ribbon">
+                <br><br>
+                <p>Заказ по телефону: +79228223022</p>
+                <p>Группа во Вконтакте: <a href="https://vk.com/club157227782" target="_blank"> Ленточный Фейерверк</a></p>
+                <br><br>
+            </div>
+            <div class="purchase">
+                <div class="card flex fd-col">
+                    <form action="" method="post">
+                        <div class="get_quantity flex fd-row jc-se">
+                            <img src="{{ribbon.image.url}}" alt="ribbon-img">
+                            <h4>{{ribbon.ribbon_name}}</h4>
+                            <h4>{{ribbon.price}} p</h4>
+                            <p>шт <input type="text" name="quantity" id="" placeholder="0"></p>
+                        </div>
+                        <br>
+                        {% csrf_token %}
+                        <p>customer_name {{form.customer_name}}</p>
+                        <p>phone {{form.phone}}</p>
+                        <p>city {{form.city}}</p>
+                        <p>street {{form.street}}</p>
+                        <p>building {{form.building}}</p>
+                        <p>apartment {{form.apartment}}</p>
+                        <p>region {{form.region}}</p>
+                        <p>zip_code {{form.zip_code}}</p>
+                        <input type="submit" value="submit">                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
