@@ -30,7 +30,7 @@
     display: grid;
     justify-content: center;
     align-items: center;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, 320px);
     gap: 20px;
     height: 100%;
 }

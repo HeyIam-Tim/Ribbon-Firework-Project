@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 
 from django.views.generic.list import ListView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import CreateView, FormView
+
 from django.urls import reverse_lazy
 
 from django.contrib.auth.views import LoginView
@@ -9,13 +10,24 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 
-from .models import Ribbon
+from .models import Ribbon, OrderInfo
 
 
 class RibbonList(ListView):
     model = Ribbon
     template_name = 'ribbon/index.html'
     context_object_name = 'ribbons'
+
+
+class RibbonCreate(CreateView):
+    model = OrderInfo
+    fields = '__all__'
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(RibbonCreate, self).form_valid(form)
+
 
 
 class RegisterPage(FormView):

@@ -1,0 +1,24 @@
+{% extends 'ribbon/base.html' %}
+
+{% block content %}
+<h2>Ribbon Create</h2>
+    <div class="register">
+        <div class="card">
+            <div class="flex fd-col">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    {{form.customer_name}}
+                    {{form.phone}}
+                    {{form.city}}
+                    {{form.street}}
+                    {{form.building}}
+                    {{form.apartment}}
+                    {{form.region}}
+                    {{form.zip_code}}
+                    <input type="submit" value="submit">
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

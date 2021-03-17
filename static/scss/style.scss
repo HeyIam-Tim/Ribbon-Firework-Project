@@ -12,6 +12,7 @@
 
 body {
     background-color: $white-color;
+    // background-color: red;
     color: $dark-color;
     line-height: 1.6;
     font-family: 'Lato', sans-serif;
@@ -80,7 +81,7 @@ p {
         .actions {
             padding: 0 20px;
 
-            .card {
+            .cart {
                 background-color: $yellow-color;
             }
         }
@@ -90,6 +91,14 @@ p {
         padding: 10px;
     }
 
+    .about {
+        max-width: 1000px;
+        margin: 40px auto;
+
+        a {
+            color: $green-color;
+        }
+    }
 
 }
 
@@ -111,6 +120,7 @@ p {
             margin-top: 20px;
         }
 
+
         .creden {
             width: 80%;
             margin: 5px auto;
@@ -130,6 +140,10 @@ p {
                 font-size: $main-font-size;
 
             }
+        }
+
+        a {
+            color: $green-color;
         }
     }
 }

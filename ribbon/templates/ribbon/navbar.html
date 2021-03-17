@@ -1,6 +1,6 @@
 <section class="navbar">
     <div class="flex jc-sb container">
-        <h1 class="logo">Ленточный Фейверк</h1>
+        <a href="{% url 'index' %}"><h1 class="logo">Ленточный Фейверк</h1></a>
         <nav>
             {% if request.user.is_authenticated %}
                 <a href="">Корзина</a>
