@@ -1,4 +1,6 @@
 @media(max-width: 700px) {
+
+
     .container {
         padding: 0 5px;
     }
@@ -37,6 +39,20 @@
 
                 .card {width: 95%;}
             }
+        }
+
+    }
+
+    .orderinfo {
+        width: 100%;
+
+        td {
+            font-size: 13px;
+            padding: 0 auto;
+        }
+        
+        .hide {
+            display: none;
         }
 
     }

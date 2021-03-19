@@ -2,6 +2,11 @@
 
 {% block content %}
 <section class="showcase">
+    <div class="message">
+        {% for message in messages %}
+            <div class="flex jc-c">{{message}}</div> 
+        {% endfor %}
+    </div>
     <div class="grid">
         {% for ribbon in ribbons %}
             <div class="card">

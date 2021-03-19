@@ -1,5 +1,6 @@
 # pylint: disable=E1101
 from django.shortcuts import render, redirect
+from django.contrib import messages
 
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -13,6 +14,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 
 from .models import Ribbon, OrderInfo, OrderItem
+from django.utils.dateparse import parse_date
 
 
 class RibbonList(ListView):
@@ -21,17 +23,20 @@ class RibbonList(ListView):
     context_object_name = 'ribbons'
 
 
-class RibbonCreate(CreateView):
+class OrderInfoCreate(CreateView):
     model = OrderInfo
     template_name = 'ribbon/single_purchase.html'
-    fields = ['customer_name', 'phone', 'city', 'street', 'building', 'apartment', 'region', 'zip_code']
+    fields = ['customer_name', 'phone', 'city', 'street', 'building', 'apartment', 'region', 'zip_code', 'created']
     success_url = reverse_lazy('index')
 
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         if form.is_valid():
-            form.instance.user = self.request.user
-            order_info = form.save()
+            if self.request.user.is_authenticated:
+                form.instance.user = self.request.user
+            else:
+                form.instance.user = None
+            order_info = form.save() 
             print('ORDERINFO: ', order_info)
             pk = self.kwargs.get(self.pk_url_kwarg)
             ribbon = Ribbon.objects.get(id=pk)
@@ -43,6 +48,8 @@ class RibbonCreate(CreateView):
             print('ITEMTOTAL: ', order_item.item_total)
             print('ORDERITEM: ', order_item)
             order_info.order_total = order_info.get_order_total
+            id_order = order_info.id
+            messages.success(request, f"Поздравляем! Ваш заказ номер '{id_order}' успешно оформлен!")
             print('ORDERTOTAL: ', order_info.order_total)
             return self.form_valid(form)
 
@@ -52,6 +59,17 @@ class RibbonCreate(CreateView):
         ribbon = Ribbon.objects.get(id=pk)
         context['ribbon'] = ribbon
         return context
+
+
+class OrderInfoList(ListView):
+    model = OrderInfo
+    context_object_name = 'orderinfos'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['orderinfos'] = context['orderinfos'].filter(user=self.request.user)
+        return context
+
 
 
 class RegisterPage(FormView):

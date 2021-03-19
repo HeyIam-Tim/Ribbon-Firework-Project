@@ -54,14 +54,8 @@ p {
     font-size: $main-font-size;
 }
 
-input[type='text'], input[type='password'] {
-    width: 100%;
-    border: 1px solid rgb(121, 121, 121);
-    border-radius: 5px;
-    height: 30px;
-    padding: 0 10px;
-    outline: none;
-    font-size: $main-font-size;
+input[type='text'], input[type='password'], input[type='number'], textarea {
+    @extend %field-shared;
 }
 
 .navbar {
@@ -75,8 +69,28 @@ input[type='text'], input[type='password'] {
     }
 }
 
+@keyframes cssAnimation {
+    0%   {opacity: 1;}
+    90%  {opacity: 1;
+        height: 0;}
+    100% {opacity: 0;
+        height: 0;}
+}
+
 .showcase {
     margin: 40px auto;
+
+    .message {
+        width: 90%;
+        margin: 0 auto;
+
+        .jc-c {
+            color: $green-color;
+            font-size: 20px;
+            margin-bottom: 25px;
+            animation: cssAnimation 5s forwards;
+        }
+    }
 
     img {
         border-radius: 5px 5px 0 0;
@@ -125,6 +139,7 @@ input[type='text'], input[type='password'] {
             font-size: 20px;
             margin: 10px auto;
         }
+
         .button {
             padding: 10px;
             margin: 10px auto;
@@ -155,8 +170,18 @@ input[type='text'], input[type='password'] {
 
     .ribbon_info {
         width: 49%;
+        margin: 50px auto;
 
         a {color: $green-color;}
+
+        
+        .back {
+            a {
+                text-decoration: underline;
+            }
+        }
+        
+        
     }
 
     .purchase {
@@ -167,31 +192,72 @@ input[type='text'], input[type='password'] {
             margin: 0 auto;
             padding: 40px 20px;
 
-            p {font-size: 13px;
-            font-weight: 100;}
+            p {
+                font-size: 13px;
+                font-weight: 100;
+                width: 90%;
+                margin: 5px auto;
+            }
+
+            .button {
+                padding: 10px;
+                margin: 10px auto;
+                
+            }
             
             .get_quantity {
-
                 width: 100%;
+                margin: 5px auto;
 
                 img {
                     width: 80px;
                 }
 
-                h4 {margin: 5px;
-                font-weight: 300;}
-                p {margin: 5px;
-                    font-weight: 700;
-                font-size: 16px;}
+                h4 {
+                    font-weight: 300;
+                    text-align: center;
+                    // margin: 0 5px;
+                    margin-right: 10px;
+                }
 
-                input[type='text'] {
-                    width: 40px;
+                p {
+                    margin: 0;
+                    width: 80px;
+                    font-weight: 700;
+                    font-size: 16px;
+                }
+
+                input[type='number'] {
+                    width: 55px;
                 }
 
             }
 
+            textarea {
+                height: 100px;
+                padding: 5px;
+            }
+
         }
     }
+}
+
+.orderinfo {
+    width: 100%;
+    margin: 40px auto;
+
+    table {
+        width: 80%;
+        margin: 0 auto;
+
+        tr {
+
+            td {
+                text-align: center;
+                padding: 10px 5px;
+            }
+        }
+    } 
 }
 
 .footer {

@@ -22,6 +22,14 @@
     justify-content: space-around;
 }
 
+.jc-start {
+    justify-content: flex-start;
+}
+
+.ai-start {
+    align-items: flex-start;
+}
+
 .fd-row {
     flex-direction: row;
 }
@@ -56,4 +64,14 @@
     margin: 0 auto;
     overflow: auto;
 
+}
+
+%field-shared {
+    width: 100%;
+    border: 1px solid rgb(121, 121, 121);
+    border-radius: 5px;
+    height: 30px;
+    padding: 0 10px;
+    outline: none;
+    font-size: $main-font-size;
 }
