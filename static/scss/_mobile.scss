@@ -45,14 +45,27 @@
 
     .orderinfo {
         width: 100%;
+        margin: 20px auto;
 
-        td {
-            font-size: 13px;
-            padding: 0 auto;
+        h2 {
+            margin: 10px auto;
+        }
+
+        table {
+            margin: 0;
+            width: 100%;
         }
         
         .hide {
             display: none;
+        }
+
+    }
+
+    .orderinfo-detail {
+        
+        .flex {
+            width: 100%;
         }
 
     }

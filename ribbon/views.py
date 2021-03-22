@@ -26,7 +26,16 @@ class RibbonList(ListView):
 class OrderInfoCreate(CreateView):
     model = OrderInfo
     template_name = 'ribbon/single_purchase.html'
-    fields = ['customer_name', 'phone', 'city', 'street', 'building', 'apartment', 'region', 'zip_code', 'created']
+    fields = [
+        'customer_name',
+        'phone',
+        'city',
+        'street',
+        'building',
+        'apartment',
+        'region',
+        'zip_code',
+        ]
     success_url = reverse_lazy('index')
 
     def post(self, request, *args, **kwargs):
@@ -42,7 +51,13 @@ class OrderInfoCreate(CreateView):
             ribbon = Ribbon.objects.get(id=pk)
             print('RIBBON: ', ribbon)
             quantity = self.request.POST.get('quantity')
-            order_item = OrderItem(order_info=order_info, ribbon_name=ribbon.ribbon_name, image=ribbon.image, price=ribbon.price, quantity=quantity)
+            order_item = OrderItem(
+                order_info=order_info,
+                ribbon_name=ribbon.ribbon_name,
+                image=ribbon.image,
+                price=ribbon.price,
+                quantity=quantity
+                )
             order_item.item_total = order_item.get_total
             order_item.save()
             print('ITEMTOTAL: ', order_item.item_total)
@@ -67,8 +82,13 @@ class OrderInfoList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['orderinfos'] = context['orderinfos'].filter(user=self.request.user)
+        context['orderinfos'] = context['orderinfos'].filter(user=self.request.user).order_by('-created')
         return context
+
+
+class OrderInfoDetail(DetailView):
+    model = OrderInfo
+    context_object_name = 'orderinfo'
 
 
 

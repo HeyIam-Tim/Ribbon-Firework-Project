@@ -2,57 +2,27 @@
 
 {% block content %}
     <section class="orderinfo">
-        <!-- <div class="flex fd-col">
-            <div class="head flex fd-row jc-sb">
-                <p>Трек номер</p>
-                <p>Имя</p>
-                <p>Телефон</p>
-                <p>Дата заказа</p>
-                <p>Количество</p>
-                <p>Сумма</p>
-                <p>Статус</p>
-            </div>
-            {% for orderinfo in orderinfos %}
-                {% if orderinfo %}
-                <div class="flex fd-row jc-sb">
-                    <div>{{orderinfo.id}}</div>
-                    <div>{{orderinfo.customer_name}}</div>
-                    <div>{{orderinfo.phone}}</div>
-                    <div>{{orderinfo.created}}</div>
-                    <div>{{orderinfo.get_quantity_total}}</div>
-                    <div>{{orderinfo.order_total}}</div>
-                    <div>{{orderinfo.status}}</div>
-                </div><br>
-                {% else %}
-                    <br>
-                    <p>У Вас нет заказов.</p>
-                    <br>
-                {% endif %}
-            {% endfor %}
-        </div> -->
-
-
-        
+        <h2>Мои Заказы</h2>
         <table>
             <tr>
-              <td>Трек номер</td>
+              <td>Заказ</td>
               <td class="hide">Имя</td>
               <td class="hide">Телефон</td>
               <td>Дата заказа</td>
-              <td class="hide">Количество</td>
+              <td class="hide">Кол</td>
               <td>Сумма</td>
               <td>Статус</td>
             </tr>
             {% for orderinfo in orderinfos %}
                 {% if orderinfo %}
                 <tr>
-                    <td>{{orderinfo.id}}</td>
-                    <td class="hide">{{orderinfo.customer_name}}</td>
-                    <td class="hide">{{orderinfo.phone}}</td>
-                    <td>{{orderinfo.date_formated}}</td>
-                    <td class="hide">{{orderinfo.get_quantity_total}}</td>
-                    <td>{{orderinfo.order_total}}p</td>
-                    <td>{{orderinfo.status}}</td>
+                    <td><a href="{% url 'orderinfo-detail' orderinfo.id %}">{{orderinfo.id}}</a></td>
+                    <td class="hide"><a href="{% url 'orderinfo-detail' orderinfo.id %}">{{orderinfo.customer_name}}</a></td>
+                    <td class="hide"><a href="{% url 'orderinfo-detail' orderinfo.id %}">{{orderinfo.phone}}</a></td>
+                    <td><a href="{% url 'orderinfo-detail' orderinfo.id %}">{{orderinfo.date_formated}}</a></td>
+                    <td class="hide"><a href="{% url 'orderinfo-detail' orderinfo.id %}">{{orderinfo.get_quantity_total}}</a></td>
+                    <td><a href="{% url 'orderinfo-detail' orderinfo.id %}">{{orderinfo.order_total|floatformat:2}}p</a></td>
+                    <td><a href="{% url 'orderinfo-detail' orderinfo.id %}">{{orderinfo.status}}</a></td>
                 </tr>
                 {% else %}
                     <br>

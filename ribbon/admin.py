@@ -12,9 +12,25 @@ class OrderItemInline(admin.TabularInline):
     extra = 1
 
 class OrderInfoAdmin(admin.ModelAdmin):
-    fieldsets = [(None, {'fields': ['customer_name', 'phone', 'city', 'street', 'building', 'apartment', 'region', 'zip_code', 'order_total', 'status']}),]
+    fieldsets = [(None, {'fields': [
+        'customer_name',
+        'phone',
+        'city',
+        'street',
+        'building',
+        'apartment',
+        'region',
+        'zip_code',
+        'order_total',
+        'status']}),]
     inlines = [OrderItemInline]
-    list_display = ('customer_name', 'phone', 'created', 'order_total', 'status')
+    list_display = (
+        'customer_name',
+        'phone',
+        'created',
+        'order_total',
+        'status'
+        )
 
 
 admin.site.register(Ribbon, RibbonAdmin)

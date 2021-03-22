@@ -23,6 +23,7 @@
                         </div>
                         <br>
                         {% csrf_token %}
+                        <p>Информация для доставки:</p>
                         <p>ФИО: {{form.customer_name}}</p>
                         <p>Телефон: {{form.phone}}</p>
                         <p>Город: {{form.city}}</p>

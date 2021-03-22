@@ -12,7 +12,7 @@
 
 body {
     background-color: $white-color;
-    // background-color: red;
+    // background-color: red; 
     color: $dark-color;
     line-height: 1.6;
     font-family: 'Lato', sans-serif;
@@ -86,9 +86,9 @@ input[type='text'], input[type='password'], input[type='number'], textarea {
 
         .jc-c {
             color: $green-color;
-            font-size: 20px;
+            font-size: 16px;
             margin-bottom: 25px;
-            animation: cssAnimation 5s forwards;
+            animation: cssAnimation 8s forwards;
         }
     }
 
@@ -246,6 +246,12 @@ input[type='text'], input[type='password'], input[type='number'], textarea {
     width: 100%;
     margin: 40px auto;
 
+    h2 {
+        font-size: 20px;
+        text-align: center;
+        margin: 20px auto;
+    }
+
     table {
         width: 80%;
         margin: 0 auto;
@@ -255,9 +261,52 @@ input[type='text'], input[type='password'], input[type='number'], textarea {
             td {
                 text-align: center;
                 padding: 10px 5px;
+
+                a {
+                    color: $dark-color;
+                }
             }
         }
+        tr:hover {
+            transform: scale(1.01);
+
+        }
     } 
+}
+
+.orderinfo-detail {
+    width: 100%;
+    margin: 40px auto;
+
+    h2 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    #head {
+        margin: 20px auto;
+    }
+
+    .flex {
+        width: 80%;
+        margin: 0 auto;
+
+        .fd-row {
+            margin: 5px auto;
+
+            img {
+                width: 70px;
+                text-align: center;
+                width: 80px;
+            }
+            
+            p {
+                text-align: center;
+                width: 100px;
+                font-size: 16px;
+            }
+        }
+    }
 }
 
 .footer {
