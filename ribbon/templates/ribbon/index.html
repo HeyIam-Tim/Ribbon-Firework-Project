@@ -17,7 +17,7 @@
                         <div class="cta">
                             <a href="{% url 'ribbon-create' ribbon.id %}"><button>Купить</button></a>
                             {% if request.user.is_authenticated %}
-                            <button class="cart">Корзина</button>
+                            <button data-ribbonid="{{ribbon.id}}" class="cart cart-btn">Корзина</button>
                             {% endif %}
                         </div>
                         <h3>{{ribbon.price}} p</h3>

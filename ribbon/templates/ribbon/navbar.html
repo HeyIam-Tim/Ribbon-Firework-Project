@@ -1,16 +1,19 @@
+{% load static %}
 <section class="navbar">
     <div class="flex jc-sb container">
         <a href="{% url 'index' %}"><h1 class="logo">Ленточный Фейверк</h1></a>
         <nav>
-            {% if request.user.is_authenticated %}
-                <a href="">Корзина</a>
-                <a href="{% url 'orderinfo-list' %}">Мои Заказы</a>
-                <a href="">{{request.user}}</a>
-                <a href="{% url 'logout' %}">Выйти</a>
-            {% else %}
-                <a href="{% url 'login' %}">Войти</a>
-                <a href="{% url 'register' %}">Создать аккаунт</a>
-            {% endif %}
+            <div class="flex">
+                {% if request.user.is_authenticated %}
+                    <a class="cart-link" href=""><img src="{% static 'images/truetranscart.png' %}" alt="cartimg"><p class="cart-total">12</p></a>
+                    <a href="{% url 'orderinfo-list' %}">Мои Заказы</a>
+                    <!-- <a href="">Привет, {{request.user}}</a> -->
+                    <a href="{% url 'logout' %}">Выйти</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Войти</a>
+                    <a href="{% url 'register' %}">Создать аккаунт</a>
+                {% endif %}
+            </div>
         </nav>
     </div>
 </section>

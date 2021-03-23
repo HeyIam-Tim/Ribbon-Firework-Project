@@ -6,8 +6,6 @@
         <table>
             <tr>
               <td>Заказ</td>
-              <td class="hide">Имя</td>
-              <td class="hide">Телефон</td>
               <td>Дата заказа</td>
               <td class="hide">Кол</td>
               <td>Сумма</td>
@@ -17,8 +15,6 @@
                 {% if orderinfo %}
                 <tr>
                     <td><a href="{% url 'orderinfo-detail' orderinfo.id %}">{{orderinfo.id}}</a></td>
-                    <td class="hide"><a href="{% url 'orderinfo-detail' orderinfo.id %}">{{orderinfo.customer_name}}</a></td>
-                    <td class="hide"><a href="{% url 'orderinfo-detail' orderinfo.id %}">{{orderinfo.phone}}</a></td>
                     <td><a href="{% url 'orderinfo-detail' orderinfo.id %}">{{orderinfo.date_formated}}</a></td>
                     <td class="hide"><a href="{% url 'orderinfo-detail' orderinfo.id %}">{{orderinfo.get_quantity_total}}</a></td>
                     <td><a href="{% url 'orderinfo-detail' orderinfo.id %}">{{orderinfo.order_total|floatformat:2}}p</a></td>

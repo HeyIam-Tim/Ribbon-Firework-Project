@@ -20,6 +20,20 @@
                     <p>{{orderitem.item_total|floatformat:2}}p</p>
                 </div>
             {% endfor %}
+
+            <div class="card">
+                <div class="flex fd-col ai-start">
+                    <p>Информация для доставки:</p> 
+                    <p>ФИО: {{orderinfo.customer_name}}</p>
+                    <p>Телефон:{{orderinfo.phone}}</p>
+                    <p>Город: {{orderinfo.city}}</p>
+                    <p>Улица: {{orderinfo.street}}</p>
+                    <p>Дом: {{orderinfo.building}}</p>
+                    <p>Квартира: {{orderinfo.apartment}}</p>
+                    <p>Индекс: {{orderinfo.zip_code}}</p>
+                    <p>Регионы: {{orderinfo.region}}</p>
+                </div>
+            </div>
         </div>
     </section>
 {% endblock content %}

@@ -60,12 +60,32 @@ input[type='text'], input[type='password'], input[type='number'], textarea {
 
 .navbar {
     background-color: $green-color;
-    height: 70px;
+    height: 80px;
     
     a {
         color: $white-color;
-        margin: 0 5px;
+        margin: 0 10px;
         font-size: $main-font-size;
+
+    }
+
+    .cart-link {
+        position: relative;
+
+        img {
+            width: 45px;
+        }
+
+        p {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: $yellow-color;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            text-align: center;
+        }
     }
 }
 
@@ -216,7 +236,6 @@ input[type='text'], input[type='password'], input[type='number'], textarea {
                 h4 {
                     font-weight: 300;
                     text-align: center;
-                    // margin: 0 5px;
                     margin-right: 10px;
                 }
 
@@ -253,14 +272,14 @@ input[type='text'], input[type='password'], input[type='number'], textarea {
     }
 
     table {
-        width: 80%;
+        width: 60%;
         margin: 0 auto;
 
         tr {
 
             td {
                 text-align: center;
-                padding: 10px 5px;
+                padding: 5px 5px;
 
                 a {
                     color: $dark-color;
@@ -298,12 +317,22 @@ input[type='text'], input[type='password'], input[type='number'], textarea {
                 width: 70px;
                 text-align: center;
                 width: 80px;
-            }
+            } 
             
             p {
                 text-align: center;
                 width: 100px;
                 font-size: 16px;
+            }
+        }
+
+        .card {
+            margin: 50px auto;
+            width: 300px;
+            padding: 30px 20px;
+
+            p {
+                padding: 5px 0;
             }
         }
     }
