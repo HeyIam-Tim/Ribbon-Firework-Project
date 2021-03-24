@@ -14,13 +14,29 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 
 from .models import Ribbon, OrderInfo, OrderItem
-from django.utils.dateparse import parse_date
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework import mixins
+from .serializers import RibbonSerializer
+
+# class RibbonList(ListView):
+#     model = Ribbon
+#     template_name = 'ribbon/index.html'
+#     context_object_name = 'ribbons'
 
 
 class RibbonList(ListView):
     model = Ribbon
     template_name = 'ribbon/index.html'
     context_object_name = 'ribbons'
+
+
+class RibbonListApi(APIView):
+    def get(self, request):
+        ribbons = Ribbon.objects.all()
+        serializer = RibbonSerializer(ribbons, many=True)
+        return Response(serializer.data)
 
 
 class OrderInfoCreate(CreateView):

@@ -60,7 +60,7 @@ input[type='text'], input[type='password'], input[type='number'], textarea {
 
 .navbar {
     background-color: $green-color;
-    height: 80px;
+    height: 70px;
     
     a {
         color: $white-color;
@@ -73,7 +73,7 @@ input[type='text'], input[type='password'], input[type='number'], textarea {
         position: relative;
 
         img {
-            width: 45px;
+            width: 40px; 
         }
 
         p {
