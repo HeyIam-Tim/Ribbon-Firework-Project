@@ -35,3 +35,4 @@ class OrderInfoAdmin(admin.ModelAdmin):
 
 admin.site.register(Ribbon, RibbonAdmin)
 admin.site.register(OrderInfo, OrderInfoAdmin)
+# admin.site.register(OrderItem)

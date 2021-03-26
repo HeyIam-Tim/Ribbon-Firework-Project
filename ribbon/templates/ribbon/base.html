@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}">  -->
     <link rel="stylesheet" href="/static/css/style.css/"> 
-    <script type="text/javascript">
-        let user = '{{request.user}}'
-        console.log('hello', user)
-    </script>
     <title>Ribbon</title>
 </head>
 <header>
@@ -21,8 +17,7 @@
 
         {% endblock content %}
     </div>
-
-    <script src="{% static 'js/cart.js' %}"></script>
+    <script src="{% static 'js/cart3.js' %}"></script>
 </body>
 <footer>
     {% include 'ribbon/footer.html' %}

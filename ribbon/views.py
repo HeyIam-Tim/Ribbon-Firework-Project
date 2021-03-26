@@ -14,16 +14,14 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 
 from .models import Ribbon, OrderInfo, OrderItem
+from .forms import OrderItemForm
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import mixins
-from .serializers import RibbonSerializer
-
-# class RibbonList(ListView):
-#     model = Ribbon
-#     template_name = 'ribbon/index.html'
-#     context_object_name = 'ribbons'
+from .serializers import RibbonSerializer, OrderItemSerializer
+from django.http import JsonResponse
+from django.http import Http404
 
 
 class RibbonList(ListView):
@@ -32,16 +30,8 @@ class RibbonList(ListView):
     context_object_name = 'ribbons'
 
 
-class RibbonListApi(APIView):
-    def get(self, request):
-        ribbons = Ribbon.objects.all()
-        serializer = RibbonSerializer(ribbons, many=True)
-        return Response(serializer.data)
-
-
-class OrderInfoCreate(CreateView):
+class OrderInfoCreate(CreateView): 
     model = OrderInfo
-    template_name = 'ribbon/single_purchase.html'
     fields = [
         'customer_name',
         'phone',
@@ -52,7 +42,22 @@ class OrderInfoCreate(CreateView):
         'region',
         'zip_code',
         ]
+    template_name = 'ribbon/single_purchase.html'
     success_url = reverse_lazy('index')
+
+    def create_order_item(self, request, order_info):
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        ribbon = Ribbon.objects.get(id=pk)
+        quantity = self.request.POST.get('quantity')
+        order_item = OrderItem(
+            order_info=order_info,
+            ribbon_name=ribbon.ribbon_name,
+            image=ribbon.image,
+            price=ribbon.price,
+            quantity=quantity,
+            )
+        order_item.item_total = order_item.get_total
+        order_item.save()
 
     def post(self, request, *args, **kwargs):
         form = self.get_form()
@@ -61,27 +66,11 @@ class OrderInfoCreate(CreateView):
                 form.instance.user = self.request.user
             else:
                 form.instance.user = None
-            order_info = form.save() 
-            print('ORDERINFO: ', order_info)
-            pk = self.kwargs.get(self.pk_url_kwarg)
-            ribbon = Ribbon.objects.get(id=pk)
-            print('RIBBON: ', ribbon)
-            quantity = self.request.POST.get('quantity')
-            order_item = OrderItem(
-                order_info=order_info,
-                ribbon_name=ribbon.ribbon_name,
-                image=ribbon.image,
-                price=ribbon.price,
-                quantity=quantity
-                )
-            order_item.item_total = order_item.get_total
-            order_item.save()
-            print('ITEMTOTAL: ', order_item.item_total)
-            print('ORDERITEM: ', order_item)
+            order_info = form.save()
+            self.create_order_item(request, order_info)
             order_info.order_total = order_info.get_order_total
             id_order = order_info.id
             messages.success(request, f"Поздравляем! Ваш заказ номер '{id_order}' успешно оформлен!")
-            print('ORDERTOTAL: ', order_info.order_total)
             return self.form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -106,6 +95,46 @@ class OrderInfoDetail(DetailView):
     model = OrderInfo
     context_object_name = 'orderinfo'
 
+
+class OrderAPI(APIView):
+    def get_ribbon(self, pk):
+        ribbon = Ribbon.objects.get(id=pk)
+        return ribbon
+
+    def post(self, request):
+        user = request.user
+        order_info = OrderInfo(user=user)
+        order_info.save()
+        print('ORDERITEM: ', order_info)
+        pk = request.data['ribbonId']
+        ribbon = self.get_ribbon(pk)
+        print('ribbon_test', ribbon)
+
+        # order_item = OrderItemForm(instance=ribbon)
+        # if order_item.is_valid():
+        #     order_item.save()
+        # print('order_item', order_item.data)
+        # print('order_item', order_item.ribbon_name)
+        # print('order_item', order_item.image)
+        # print('order_item', order_item.price)
+        # print('errors', order_item.error_class)
+        # print('order_item', order_item)
+
+        order_item = OrderItem(
+            order_info=order_info,
+            ribbon_name=ribbon.ribbon_name,
+            image=ribbon.image,
+            price=ribbon.price,
+            # quantity=quantity,
+            )
+        order_item.quantity = order_item.quantity + 6
+        order_item.item_total = order_item.get_total
+        order_item.save()
+        print('order_item: ', order_item.quantity)
+
+        serializer = OrderItemSerializer(order_item)
+        print('serializer: ', serializer.data)
+        return Response(serializer.data)
 
 
 class RegisterPage(FormView):

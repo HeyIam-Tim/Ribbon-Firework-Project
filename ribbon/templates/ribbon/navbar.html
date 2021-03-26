@@ -5,9 +5,10 @@
         <nav>
             <div class="flex">
                 {% if request.user.is_authenticated %}
-                    <a class="cart-link" href=""><img src="{% static 'images/truetranscart.png' %}" alt="cartimg"><p class="cart-total">12</p></a>
+                    <a class="cart-link" href="">
+                        <img src="{% static 'images/truetranscart.png' %}" alt="cartimg"><p class="cart-total">11</p>
+                    </a>
                     <a href="{% url 'orderinfo-list' %}">Мои Заказы</a>
-                    <!-- <a href="">Привет, {{request.user}}</a> -->
                     <a href="{% url 'logout' %}">Выйти</a>
                 {% else %}
                     <a href="{% url 'login' %}">Войти</a>

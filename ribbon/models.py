@@ -23,7 +23,11 @@ class OrderInfo(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.customer_name
+        return str(self.created)
+    # def __str__(self):
+    #     return self.customer_name
+    # def __str__(self):
+    #     return self.user.username
 
     @property
     def get_order_total(self):
@@ -50,7 +54,6 @@ class OrderItem(models.Model):
     price = models.DecimalField(max_digits=7, decimal_places=2)
     quantity = models.IntegerField(default=0, null=True, blank=True)
     item_total = models.FloatField(default=0)
-
 
     def __str__(self):
         return self.ribbon_name
