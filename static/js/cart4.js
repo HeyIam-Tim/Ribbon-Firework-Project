@@ -30,10 +30,9 @@ let updateCart = (ribbonId) => {
     }
     const csrftoken = getCookie('csrftoken');
 
-    let url = "/order-api/"
+    let url = "/ribbon-api/"
     fetch(url, {
         method:'POST',
-        // method:'GET',
         headers:{
             'Content-Type':'application/json',
             'X-CSRFToken':csrftoken,
@@ -43,5 +42,6 @@ let updateCart = (ribbonId) => {
     .then(res => res.json())
     .then(data => {
         console.log('DATA: ', data)
+        document.querySelector('#cart-quantity').innerHTML = data.item_quantity
     })
 }

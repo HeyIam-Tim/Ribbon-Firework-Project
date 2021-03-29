@@ -18,7 +18,7 @@ class OrderInfo(models.Model):
     apartment = models.CharField(max_length=200, null=True, blank=True)
     region = models.TextField(max_length=400, null=True, blank=True)
     zip_code = models.IntegerField(default=0, null=True, blank=True)
-    order_total = models.FloatField(default=0)
+    order_total = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     status = models.CharField(max_length=200, default="Новый", null=True, blank=True, choices=STATUS)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -47,13 +47,30 @@ class OrderInfo(models.Model):
         return d_formated
 
 
+class PreOrder(models.Model):
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    # def __str__(self):
+    #     return self.user.username
+    def __str__(self):
+        return str(self.created)
+
+    @property
+    def get_quantity_total(self): 
+        quantity_totals = self.orderitem_set.all()
+        quantity = sum([quantity.quantity for quantity in quantity_totals])
+        return quantity
+
+
 class OrderItem(models.Model):
     order_info = models.ForeignKey(OrderInfo, null=True, blank=True, on_delete=models.CASCADE)
+    preorder = models.ForeignKey(PreOrder, null=True, blank=True, on_delete=models.CASCADE)
     ribbon_name = models.CharField(max_length=200, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
     price = models.DecimalField(max_digits=7, decimal_places=2)
     quantity = models.IntegerField(default=0, null=True, blank=True)
-    item_total = models.FloatField(default=0)
+    item_total = models.DecimalField(max_digits=7, decimal_places=2, default=0)
 
     def __str__(self):
         return self.ribbon_name

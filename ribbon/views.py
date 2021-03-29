@@ -13,7 +13,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 
-from .models import Ribbon, OrderInfo, OrderItem
+from .models import Ribbon, OrderInfo, OrderItem, PreOrder
 from .forms import OrderItemForm
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -96,19 +96,19 @@ class OrderInfoDetail(DetailView):
     context_object_name = 'orderinfo'
 
 
-class OrderAPI(APIView):
-    def get_ribbon(self, pk):
-        ribbon = Ribbon.objects.get(id=pk)
-        return ribbon
+# class OrderAPI(APIView):
+#     def get_ribbon(self, pk):
+#         ribbon = Ribbon.objects.get(id=pk)
+#         return ribbon
 
-    def post(self, request):
-        user = request.user
-        order_info = OrderInfo(user=user)
-        order_info.save()
-        print('ORDERITEM: ', order_info)
-        pk = request.data['ribbonId']
-        ribbon = self.get_ribbon(pk)
-        print('ribbon_test', ribbon)
+#     def post(self, request):
+#         user = request.user
+#         order_info = OrderInfo(user=user)
+#         order_info.save()
+#         print('ORDERITEM: ', order_info)
+#         pk = request.data['ribbonId']
+#         ribbon = self.get_ribbon(pk)
+#         print('ribbon_test', ribbon)
 
         # order_item = OrderItemForm(instance=ribbon)
         # if order_item.is_valid():
@@ -120,21 +120,104 @@ class OrderAPI(APIView):
         # print('errors', order_item.error_class)
         # print('order_item', order_item)
 
-        order_item = OrderItem(
-            order_info=order_info,
+        # order_item = OrderItem(
+        #     order_info=order_info,
+        #     ribbon_name=ribbon.ribbon_name,
+        #     image=ribbon.image,
+        #     price=ribbon.price,
+        #     # quantity=quantity,
+        #     )
+        # order_item.quantity = order_item.quantity + 6
+        # order_item.item_total = order_item.get_total
+        # order_item.save()
+        # print('order_item: ', order_item.quantity)
+
+        # serializer = OrderItemSerializer(order_item)
+        # print('serializer: ', serializer.data)
+        # return Response(serializer.data)
+
+
+class RibbonAPI(APIView):
+    def get(self, request):
+        all_preorder = PreOrder.objects.all()
+        print('PREORDER_ALL: ', all_preorder)
+        if not all_preorder: 
+            return Response({'item_quantity':0}) 
+        else:
+            preorder = PreOrder.objects.all().order_by('-created')[0]
+            return Response({'item_quantity':preorder.get_quantity_total})
+
+    def post(self, request):
+        user = request.user
+
+        try:
+            preorder, created = PreOrder.objects.get_or_create(user=user)
+            if created:
+                preorder.save()
+            print('FIRST_PREORDER: ', preorder) 
+        except:
+            preorder = PreOrder.objects.all().order_by('-created')[0]
+            print('LAST_PREORDER: ', preorder)
+        
+        # new_preorder = PreOrder(user=user)
+        # new_preorder.save()
+        # print('NEW_PREORDER: ', new_preorder)
+        # print('PREORDER: ', preorder)
+        preorders = PreOrder.objects.all()
+        print('ALL_PREORDERS: ', preorders)
+        # preorders = PreOrder.objects.all().delete()
+        # print('DELETED!!!')
+
+        ribbon_id = request.data['ribbonId']
+        print("RIBBON_ID: ", ribbon_id)
+        ribbon = Ribbon.objects.get(id=ribbon_id)
+        print("RIBBON: ", ribbon)
+
+        order_item, created = OrderItem.objects.get_or_create(
+            preorder=preorder,
             ribbon_name=ribbon.ribbon_name,
             image=ribbon.image,
             price=ribbon.price,
-            # quantity=quantity,
-            )
-        order_item.quantity = order_item.quantity + 6
+        )
+        order_item.quantity = order_item.quantity + 1
+        print("QUANTITY: ", order_item.quantity)
         order_item.item_total = order_item.get_total
+        print("ITEM_TOTAL: ", order_item.item_total)
         order_item.save()
-        print('order_item: ', order_item.quantity)
+        print("ORDER_ITEM: ", order_item)
+            
 
-        serializer = OrderItemSerializer(order_item)
-        print('serializer: ', serializer.data)
-        return Response(serializer.data)
+
+        # if request.data['submit']:
+        #     last_order_info = OrderInfo.objects.all().order_by('-created')[0]
+        #     new_order_info_id = last_order_info.id + 1
+        #     new_order_info = OrderInfo(id=new_order_info_id, user=user)
+        #     new_order_info.save()
+        #     order_info, created = OrderInfo.objects.get_or_create(id=new_order_info.id, user=user)
+        # else:
+        #     order_info, created = OrderInfo.objects.get_or_create(user=user)
+
+
+
+        # order_info, created = OrderInfo.objects.get_or_create(id=155, user=user)
+        # if created:
+        #     order_info.save()
+        # print('ORDER_INFO: ', order_info)
+
+        # ribbon = Ribbon.objects.get(id=ribbon_id)
+        # print("RIBBON: ", ribbon)
+
+        # order_item, created = OrderItem.objects.get_or_create(
+        #     order_info=order_info,
+        #     ribbon_name=ribbon.ribbon_name,
+        #     image=ribbon.image,
+        #     price=ribbon.price,
+        # )
+        # print("ORDER_ITEM: ", order_item)
+        # print("ORDER_ITEM_QUANTITY: ", order_item.quantity)
+        # print('ORDER_INFO: ', order_info.get_quantity_total)
+        return Response({'item_quantity':preorder.get_quantity_total})
+
 
 
 class RegisterPage(FormView):

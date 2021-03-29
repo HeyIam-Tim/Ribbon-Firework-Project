@@ -6,7 +6,7 @@
             <div class="flex">
                 {% if request.user.is_authenticated %}
                     <a class="cart-link" href="">
-                        <img src="{% static 'images/truetranscart.png' %}" alt="cartimg"><p class="cart-total">11</p>
+                        <img src="{% static 'images/truetranscart.png' %}" alt="cartimg"><p id="cart-quantity" class="cart-total"></p>
                     </a>
                     <a href="{% url 'orderinfo-list' %}">Мои Заказы</a>
                     <a href="{% url 'logout' %}">Выйти</a>
@@ -17,4 +17,27 @@
             </div>
         </nav>
     </div>
+
+    <script>
+
+        console.log('Hi it"s a navbar!!')
+
+        let numberItems = () => {
+            let url = '/ribbon-api/'
+            fetch(url, {
+                method:'GET',
+                headers:{
+                    'Content-Type':'application/json',
+                },
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log('DATA: ', data)
+                document.querySelector('#cart-quantity').innerHTML = data.item_quantity
+            })
+        }
+
+        numberItems()
+
+    </script>
 </section>
