@@ -1,0 +1,17 @@
+{% extends 'ribbon/base.html' %}
+
+{% block content %}
+    <h2>It's Cart</h2>
+    {% if not preorder %}
+    <img style="width: 400px;" src="/images/truetranscart.png/" alt="empty-cart">
+    <p>cart is empty</p>
+    {% else %}
+    {{preorder}}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="click">
+    </form>
+    
+    {% endif %}
+{% endblock content %}

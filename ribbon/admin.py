@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Ribbon, OrderInfo, OrderItem
+from .models import Ribbon, OrderInfo, OrderItem, PreOrder
 
 
 class RibbonAdmin(admin.ModelAdmin):
@@ -8,7 +8,7 @@ class RibbonAdmin(admin.ModelAdmin):
 
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
-    exclude = ['image']
+    exclude = ['preorder', 'image']
     extra = 1
 
 class OrderInfoAdmin(admin.ModelAdmin):
@@ -35,4 +35,4 @@ class OrderInfoAdmin(admin.ModelAdmin):
 
 admin.site.register(Ribbon, RibbonAdmin)
 admin.site.register(OrderInfo, OrderInfoAdmin)
-# admin.site.register(OrderItem)
+# admin.site.register(PreOrder)

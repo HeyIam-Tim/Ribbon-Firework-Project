@@ -22,12 +22,10 @@ class OrderInfo(models.Model):
     status = models.CharField(max_length=200, default="Новый", null=True, blank=True, choices=STATUS)
     created = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return str(self.created)
     # def __str__(self):
     #     return self.customer_name
-    # def __str__(self):
-    #     return self.user.username
+    def __str__(self):
+        return str(self.created)
 
     @property
     def get_order_total(self):
@@ -61,6 +59,12 @@ class PreOrder(models.Model):
         quantity_totals = self.orderitem_set.all()
         quantity = sum([quantity.quantity for quantity in quantity_totals])
         return quantity
+    
+    @property
+    def get_order_total(self):
+        item_totals = self.orderitem_set.all()
+        total = sum([item.get_total for item in item_totals])
+        return total
 
 
 class OrderItem(models.Model):

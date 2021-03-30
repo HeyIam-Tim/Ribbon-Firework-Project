@@ -5,7 +5,7 @@
         <nav>
             <div class="flex">
                 {% if request.user.is_authenticated %}
-                    <a class="cart-link" href="">
+                    <a class="cart-link" href="{% url 'cart' %}">
                         <img src="{% static 'images/truetranscart.png' %}" alt="cartimg"><p id="cart-quantity" class="cart-total"></p>
                     </a>
                     <a href="{% url 'orderinfo-list' %}">Мои Заказы</a>
