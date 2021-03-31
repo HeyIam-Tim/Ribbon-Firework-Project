@@ -1,0 +1,20 @@
+{% extends 'ribbon/base.html' %}
+
+{% block content %}
+<div class="delete-preorder">
+        <form action="" method="post">
+            <div class="flex fd-col">
+                {% csrf_token %}
+                <div class="question">
+                    <p>Вы уверены, что хотите очистить корзину?</p>
+                </div>
+                <div class="cta-btn">
+                    <input type="submit" class="button" value="Очистить">
+                    <a href="{% url 'cart' %}" class="button">Назад</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

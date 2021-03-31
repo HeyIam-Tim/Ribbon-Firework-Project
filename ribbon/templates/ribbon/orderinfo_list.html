@@ -3,16 +3,18 @@
 {% block content %}
     <section class="orderinfo">
         <h2>Мои Заказы</h2>
-        <table>
-            <tr>
-              <td>Заказ</td>
-              <td>Дата заказа</td>
-              <td class="hide">Кол</td>
-              <td>Сумма</td>
-              <td>Статус</td>
-            </tr>
-            {% for orderinfo in orderinfos %}
-                {% if orderinfo %}
+        {% if not orderinfos %}
+            <p>У Вас нет заказов.</p>
+        {% else %}
+            <table>
+                <tr>
+                    <td>Заказ</td>
+                    <td>Дата заказа</td>
+                    <td class="hide">Кол</td>
+                    <td>Сумма</td>
+                    <td>Статус</td>
+                </tr>
+                {% for orderinfo in orderinfos %}
                 <tr>
                     <td><a href="{% url 'orderinfo-detail' orderinfo.id %}">{{orderinfo.id}}</a></td>
                     <td><a href="{% url 'orderinfo-detail' orderinfo.id %}">{{orderinfo.date_formated}}</a></td>
@@ -20,12 +22,8 @@
                     <td><a href="{% url 'orderinfo-detail' orderinfo.id %}">{{orderinfo.order_total|floatformat:2}}p</a></td>
                     <td><a href="{% url 'orderinfo-detail' orderinfo.id %}">{{orderinfo.status}}</a></td>
                 </tr>
-                {% else %}
-                    <br>
-                    <p>У Вас нет заказов.</p>
-                    <br>
-                {% endif %}
-            {% endfor %}
-          </table>
+                {% endfor %}
+            </table>
+        {% endif %}
     </section>
 {% endblock content %}

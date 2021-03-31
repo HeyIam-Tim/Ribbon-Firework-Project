@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RibbonList, RegisterPage, RibbonLoginView, OrderInfoCreate, OrderInfoList, OrderInfoDetail, RibbonAPI, CartPage
+from .views import RibbonList, RegisterPage, RibbonLoginView, OrderInfoCreate, OrderInfoList, OrderInfoDetail, RibbonAPI, CartPage, DeletePreorder
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -12,4 +12,6 @@ urlpatterns = [
     path('orderinfo-list/', OrderInfoList.as_view(), name='orderinfo-list'),
     path('orderinfo-detail/<int:pk>/', OrderInfoDetail.as_view(), name='orderinfo-detail'),
     path('cart/', CartPage.as_view(), name='cart'),
+    path('preorder-delete/<int:pk>/', DeletePreorder.as_view(), name='preorder-delete'),
+
 ]

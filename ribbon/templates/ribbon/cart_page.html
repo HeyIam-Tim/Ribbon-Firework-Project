@@ -1,17 +1,70 @@
 {% extends 'ribbon/base.html' %}
+{% load static %}
 
 {% block content %}
-    <h2>It's Cart</h2>
-    {% if not preorder %}
-    <img style="width: 400px;" src="/images/truetranscart.png/" alt="empty-cart">
-    <p>cart is empty</p>
-    {% else %}
-    {{preorder}}
-    <form action="" method="post">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit" value="click">
-    </form>
-    
-    {% endif %}
+    <section class="cart-page">
+        <div class="flex fd-row jc-se flex-wrap">
+            {% if not preorder.orderitem_set.all %}
+            <div class="empty-cart flex fd-col">
+                <img src="{% static 'images/truetranscart.png' %}" alt="empty-cart">
+                <p>Корзина пуста.</p>
+            </div>
+            {% else %}
+            <div class="cart">
+                <table>
+                    <tr>
+                        <td>Фото</td>
+                        <td>Название</td>
+                        <td>Цена</td>
+                        <td>Кол</td>
+                    </tr>
+                    {% for orderitem in preorder.orderitem_set.all %}
+                    <tr>
+                        <td><img style="width: 70px;" src="{{orderitem.image.url}}" alt="ribbon_image"></td>
+                        <td><p>{{orderitem.ribbon_name}}</p></td>
+                        <td><p>{{orderitem.price}}p</p></td>
+                        <td><p>{{orderitem.quantity}}</p></td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Итого: </td>
+                        <td>{{preorder.get_order_total | floatformat:2 }}p</td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <div class="form">
+                <div class="card flex fd-col">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <p>Информация для доставки:</p>
+                        <p>ФИО: {{form.customer_name}}</p>
+                        <p>Телефон: {{form.phone}}</p>
+                        <p>Город: {{form.city}}</p>
+                        <p>Улица: {{form.street}}</p>
+                        <p>Дом: {{form.building}}</p>
+                        <p>Квартира: {{form.apartment}}</p>
+                        <p>Индекс: {{form.zip_code}}</p>
+                        <br>
+                        <p>Для жителей районов: <br>
+                            *Пример: Оренбургская обл,
+                            Акбулакский р-н, с. Павловка,
+                            ул. Центральная, дом 11,
+                            Индекс: 461551. {{form.region}}
+                        </p>
+                        <div class="flex jc-c">
+                            <input type="submit" class="button" value="Сделать Заказ">
+                        </div> 
+                    </form>
+                </div>
+                <a href="{% url 'preorder-delete' preorder.id %}" class="flex">
+                    <input type="submit" class="button delete-cart" value="Очистить корзину">
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </section>
 {% endblock content %}

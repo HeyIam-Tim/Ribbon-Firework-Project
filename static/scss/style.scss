@@ -59,6 +59,10 @@ input[type='text'], input[type='password'], input[type='number'], textarea {
 }
 
 .navbar {
+    // position: fixed;
+    // top: 0;
+    // width: 100%;
+    // z-index: 2;
     background-color: $green-color;
     height: 70px;
     
@@ -271,6 +275,8 @@ input[type='text'], input[type='password'], input[type='number'], textarea {
         margin: 20px auto;
     }
 
+    p {text-align: center;}
+
     table {
         width: 60%;
         margin: 0 auto;
@@ -335,6 +341,94 @@ input[type='text'], input[type='password'], input[type='number'], textarea {
                 padding: 5px 0;
             }
         }
+    }
+}
+
+.cart-page {
+    width: 100%;
+    margin: 40px auto;
+    
+    .flex {
+        .empty-cart {
+            img {
+                max-width: 250px;
+                margin-bottom: 20px;
+            }
+        }
+
+        .cart {
+            width: 49%;
+            align-self: start;
+
+            table {
+                width: 80%;
+                margin: 0 auto;
+        
+                tr {
+        
+                    td {
+                        text-align: center;
+                        padding: 3px 3px;
+                    }
+                }
+            } 
+        }
+
+        .form {
+            width: 49%;
+
+            .card {
+                width: 80%;
+                margin: 0 auto;
+                padding: 40px 30px;
+
+                p {
+                    font-size: 13px;
+                    font-weight: 100;
+                    width: 90%;
+                    margin: 5px auto;
+                }
+
+                textarea {
+                    height: 100px;
+                    padding: 5px;
+                }
+
+                .button {
+                    padding: 10px;
+                    margin: 10px auto;
+                    
+                }
+            }
+            .delete-cart {
+                padding: 10px;
+                margin: 20px auto;
+                background-color: rgb(160, 0, 0);
+            }
+        }
+    }
+}
+
+.delete-preorder {
+    margin: 40px auto;
+
+    .question {
+        margin: 20px auto;
+    }
+
+    .cta-btn {
+        a {
+            padding: 7px;
+            padding-bottom: 8px;
+            font-size: 13px;
+            background-color: $yellow-color;
+        }
+    }
+
+    .button {
+        padding: 10px;
+        margin: 10px 2px;
+        background-color: rgb(160, 0, 0);
     }
 }
 

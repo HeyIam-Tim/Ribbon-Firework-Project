@@ -4,7 +4,9 @@ from django.contrib import messages
 
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, FormView
+from django.views.generic.edit import CreateView, FormView, DeleteView
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from django.urls import reverse_lazy
 
 from django.contrib.auth.views import LoginView
@@ -13,8 +15,7 @@ from django.contrib.auth import login
 
 from .models import Ribbon, OrderInfo, OrderItem, PreOrder
 from .forms import OrderItemForm, OrderInfoForm
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from .utils import success_message
 
 
 class RibbonList(ListView):
@@ -28,17 +29,17 @@ class OrderInfoCreate(CreateView):
     template_name = 'ribbon/single_purchase.html'
     success_url = reverse_lazy('index')
 
-    def create_order_item(self, request, order_info):
+    def create_order_item(self, request, order_info):# create a single purchase
         pk = self.kwargs.get(self.pk_url_kwarg)
         ribbon = Ribbon.objects.get(id=pk)
         quantity = self.request.POST.get('quantity')
         order_item = OrderItem(
-            order_info=order_info,
+            order_info = order_info,
             ribbon_name=ribbon.ribbon_name,
             image=ribbon.image,
             price=ribbon.price,
-            quantity=quantity,
-            )
+            quantity = quantity,
+        )
         order_item.item_total = order_item.get_total
         order_item.save()
 
@@ -52,8 +53,7 @@ class OrderInfoCreate(CreateView):
             order_info = form.save()
             self.create_order_item(request, order_info)
             order_info.order_total = order_info.get_order_total
-            id_order = order_info.id
-            messages.success(request, f"Спасибо! Ваш заказ номер '{id_order}' успешно оформлен!")
+            success_message(request, order_info.id)# pops on index page
             return self.form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -92,7 +92,7 @@ class RibbonAPI(APIView):
         )
         if created:
             order_item.save()
-        order_item.quantity = order_item.quantity + 1
+        order_item.quantity = order_item.quantity + 1 #increase qunatity on each click
         order_item.item_total = order_item.get_total
         order_item.save()
 
@@ -127,16 +127,15 @@ class CartPage(CreateView):
     template_name = 'ribbon/cart_page.html'
     success_url = reverse_lazy('index')
 
-    def create_orderinfo(self, request, orderinfo):
+    def create_orderinfo(self, request, orderinfo):# mapping preorder to infoorder
         preorder =  PreOrder.objects.all().filter(user=request.user).order_by('-created')[0]
         orderitems = preorder.orderitem_set.all()
         for orderitem in orderitems:
-            orderitem.order_info = orderinfo
+            orderitem.order_info = orderinfo# preorder's orderitems now orderinfo's
             orderitem.save()
         orderinfo.order_total = orderinfo.get_order_total
         orderinfo.save()
-        id_order = orderinfo.id
-        messages.success(request, f"Спасибо! Ваш заказ номер '{id_order}' успешно оформлен!")
+        success_message(request, orderinfo.id)# pops on index page
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -144,7 +143,7 @@ class CartPage(CreateView):
             last_preorder = PreOrder.objects.all().filter(user=self.request.user).order_by('-created')[0]
             context['preorder'] = last_preorder
         except:
-            last_preorder = None
+            last_preorder = None #empty cart
         return context
     
     def post(self, request, *args, **kwargs):
@@ -153,9 +152,20 @@ class CartPage(CreateView):
             form.instance.user = request.user
             orderinfo = form.save()
             self.create_orderinfo(request, orderinfo)
-            new_preorder = PreOrder(user=request.user)
+            new_preorder = PreOrder(user=request.user) #prep cart for next purchase
             new_preorder.save()
             return self.form_valid(form)
+
+
+class DeletePreorder(DeleteView):
+    model = PreOrder
+    context_object_name = 'preorder'
+    success_url = reverse_lazy('index')
+
+    def post(self, request, *args, **kwargs):
+        new_preorder = PreOrder(user=request.user) #prep cart for next purchase
+        new_preorder.save()
+        return self.delete(request, *args, **kwargs)
 
 
 class RegisterPage(FormView):
