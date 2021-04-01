@@ -434,6 +434,11 @@ input[type='text'], input[type='password'], input[type='number'], textarea {
 
 .footer {
     margin: 20px auto;
+
+    a{
+        color: $green-color; 
+        font-size: 14px;
+    }
 }
 
 
