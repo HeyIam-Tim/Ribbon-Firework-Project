@@ -1,4 +1,5 @@
 {% extends 'ribbon/base.html' %}
+{% load static %}
 
 {% block content %}
 
@@ -16,7 +17,8 @@
                 <div class="card flex fd-col">
                     <form action="" method="post">
                         <div class="get_quantity flex fd-row jc-se">
-                            <img src="{{ribbon.image.url}}" alt="ribbon-img">
+                            <!-- <img src="{{ribbon.image.url}}" alt="ribbon-img"> -->
+                            <img src="{% static 'images/ribbon.image' %}" alt="ribbon-img">
                             <h4>{{ribbon.ribbon_name}}</h4>
                             <h4>{{ribbon.price}}p</h4>
                             <p>шт <input type="number" name="quantity" id="" placeholder="0" required></p>
