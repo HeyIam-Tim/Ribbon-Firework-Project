@@ -1,0 +1,19 @@
+{% extends 'ribbon/base.html' %}
+{% block title %}Логин{% endblock title %}
+{% block content %}
+    <section class="register">
+        <div class="card">
+            <form method="POST" action="" class="flex fd-col">
+                <h2>Ленточный Фейверк</h2>
+                {% csrf_token %}
+                <div class="creden"><p>Имя: </p>{{form.username}}</div>
+                <div class="creden"><p>Пароль: </p>{{form.password}}</div>
+                 <input type="submit" class="button" value="Войти">
+                 <br>
+                 <p>Ещё нет аккаунта?<a href="{% url 'register' %}"> Создать</a></p>
+                 <br>
+            </form>
+        </div>
+    </section>
+{% endblock content %}
+

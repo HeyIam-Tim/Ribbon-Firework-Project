@@ -1,0 +1,40 @@
+{% extends 'ribbon/base.html' %}
+{% block title %}Заказ{% endblock title %}
+{% block content %}
+    <section class="orderinfo-detail">
+        <h2>Заказ номер: {{orderinfo.id}}</h2>
+        <div class="flex fd-col">
+            <div id="head" class="flex fd-row jc-se">
+                <p>Фото</p>
+                <p>Назв</p>
+                <p>Цена</p>
+                <p>Кол</p>
+                <p>Сумма</p>
+            </div>
+            {% for orderitem in orderinfo.orderitem_set.all %}
+                <div class="flex fd-row jc-se">
+                    <img src="{{orderitem.imageUrl}}" alt="ribbon_image">
+                    <p>{{orderitem.ribbon_name}}</p> 
+                    <p>{{orderitem.price}}p</p> 
+                    <p>{{orderitem.quantity}}</p> 
+                    <p>{{orderitem.item_total|floatformat:2}}p</p>
+                </div>
+            {% endfor %}
+
+            <div class="card">
+                <div class="flex fd-col ai-start">
+                    <p>Информация для доставки:</p> 
+                    <p>ФИО: {{orderinfo.customer_name}}</p>
+                    <p>Телефон:{{orderinfo.phone}}</p>
+                    <p>Город: {{orderinfo.city}}</p>
+                    <p>Улица: {{orderinfo.street}}</p>
+                    <p>Дом: {{orderinfo.building}}</p>
+                    <p>Квартира: {{orderinfo.apartment}}</p>
+                    <p>Индекс: {{orderinfo.zip_code}}</p>
+                    <p>Регионы: {{orderinfo.region}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+

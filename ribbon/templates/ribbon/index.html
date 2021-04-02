@@ -1,0 +1,38 @@
+{% extends 'ribbon/base.html' %}
+{% block title %}Ленточный Фейверк{% endblock title %}
+{% block content %}
+<section class="showcase">
+    <div class="message">
+        {% for message in messages %}
+            <div class="flex jc-c">{{message}}</div> 
+        {% endfor %}
+    </div>
+    <div class="grid">
+        {% for ribbon in ribbons %}
+            <div class="card">
+                <a href="{% url 'ribbon-create' ribbon.id %}"><img src="{{ribbon.imageUrl}}" alt=""></a>
+                <div class="options flex fd-col">
+                    <p>{{ribbon.ribbon_name}}</p>
+                    <div class="flex jc-sb actions">
+                        <div class="cta">
+                            <a href="{% url 'ribbon-create' ribbon.id %}"><button>Купить</button></a>
+                            {% if request.user.is_authenticated %}
+                            <button data-ribbonid="{{ribbon.id}}" class="cart cart-btn">Корзина</button>
+                            {% endif %}
+                        </div>
+                        <h3>{{ribbon.price}} p</h3>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="about">
+        <p>На нашем сайте Вы можете заказать красивые, эксклюзивные повязки для волос, ободки, резинки и другие изделия. Украшения в качестве подарка вам и вашим близким!Все аксессуары авторской работы. Все сделано с душой и несет в себе частичку тепла и доброты!</p>
+        <br>
+        <p>Заказ по телефону: +79228223022</p>
+        <p>Группа во Вконтакте: <a href="https://vk.com/club157227782" target="_blank"> Ленточный Фейерверк</a></p>
+    </div>
+</section>
+
+{% endblock content %}
+
