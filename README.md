@@ -17,3 +17,8 @@ An ecommerce website for local business that sells hand-made ribbons.
 <img alt='List of orders page.' src="https://github.com/HeyIam-Tim/Ribbon-Heroku/blob/master/static/images/list-of-orders.png">
 <br><br><br>
 
+## Order Detail Page.
+
+<img alt='List of orders page.' src="https://github.com/HeyIam-Tim/Ribbon-Heroku/blob/master/static/images/view%20order.png">
+<br><br><br>
+
