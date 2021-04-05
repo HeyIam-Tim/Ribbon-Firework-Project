@@ -12,3 +12,5 @@ class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
         fields = ['ribbon_name', 'image', 'price',]
+
+        

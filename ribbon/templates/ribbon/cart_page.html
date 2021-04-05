@@ -1,5 +1,6 @@
 {% extends 'ribbon/base.html' %}
 {% load static %}
+{% block title %}Корзина{% endblock title %}
 
 {% block content %}
     <section class="cart-page">
@@ -20,7 +21,7 @@
                     </tr>
                     {% for orderitem in preorder.orderitem_set.all %}
                     <tr>
-                        <td><img style="width: 70px;" src="{{orderitem.image.url}}" alt="ribbon_image"></td>
+                        <td><img style="width: 70px;" src="{{orderitem.imageUrl}}" alt="ribbon_image"></td>
                         <td><p>{{orderitem.ribbon_name}}</p></td>
                         <td><p>{{orderitem.price}}p</p></td>
                         <td><p>{{orderitem.quantity}}</p></td>
@@ -68,3 +69,4 @@
         </div>
     </section>
 {% endblock content %}
+

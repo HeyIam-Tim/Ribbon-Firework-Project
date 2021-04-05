@@ -1,12 +1,11 @@
 {% extends 'ribbon/base.html' %}
-{% load static %}
-
+{% block title %}Ленточный Фейерверк | Купить{% endblock title %}
 {% block content %}
 
     <section class="single_purchase">
         <div class="flex fd-row ai-start">
             <div class="ribbon_info">
-                <img src="{{ribbon.image.url}}" alt="ribbon">
+                <img src="{{ribbon.imageUrl}}" alt="ribbon">
                 <br><br>
                 <p>Заказ по телефону: +79228223022</p>
                 <p>Группа во Вконтакте: <a href="https://vk.com/club157227782" target="_blank"> Ленточный Фейерверк</a></p>
@@ -17,7 +16,7 @@
                 <div class="card flex fd-col">
                     <form action="" method="post">
                         <div class="get_quantity flex fd-row jc-se">
-                            <img src="{{ribbon.image.url}}" alt="ribbon-img">
+                            <img src="{{ribbon.imageUrl}}" alt="ribbon-img">
                             <h4>{{ribbon.ribbon_name}}</h4>
                             <h4>{{ribbon.price}}p</h4>
                             <p>шт <input type="number" name="quantity" id="" placeholder="0" required></p>
@@ -49,3 +48,4 @@
     </section>
 
 {% endblock content %}
+

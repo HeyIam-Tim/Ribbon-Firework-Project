@@ -22,8 +22,6 @@ class OrderInfo(models.Model):
     status = models.CharField(max_length=200, default="Новый", null=True, blank=True, choices=STATUS)
     created = models.DateTimeField(auto_now_add=True)
 
-    # def __str__(self):
-    #     return self.customer_name
     def __str__(self):
         return str(self.created)
 
@@ -49,8 +47,6 @@ class PreOrder(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
 
-    # def __str__(self):
-    #     return self.user.username
     def __str__(self):
         return str(self.created)
 
@@ -84,6 +80,11 @@ class OrderItem(models.Model):
         total = int(self.price) * int(self.quantity)
         return total
 
+    @property
+    def imageUrl(self):
+        # url = f'/static{self.image.url}'
+        url = self.image.url
+        return url
 
 
 class Ribbon(models.Model):
@@ -93,3 +94,10 @@ class Ribbon(models.Model):
 
     def __str__(self):
         return self.ribbon_name
+
+    @property
+    def imageUrl(self):
+        # url = f'/static{self.image.url}'
+        url = self.image.url
+        return url
+

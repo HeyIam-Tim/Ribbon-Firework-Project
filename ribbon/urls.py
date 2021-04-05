@@ -15,3 +15,4 @@ urlpatterns = [
     path('preorder-delete/<int:pk>/', DeletePreorder.as_view(), name='preorder-delete'),
 
 ]
+

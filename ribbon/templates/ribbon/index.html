@@ -1,5 +1,5 @@
 {% extends 'ribbon/base.html' %}
-
+{% block title %}Ленточный Фейверк{% endblock title %}
 {% block content %}
 <section class="showcase">
     <div class="message">
@@ -10,7 +10,7 @@
     <div class="grid">
         {% for ribbon in ribbons %}
             <div class="card">
-                <a href="{% url 'ribbon-create' ribbon.id %}"><img src="{{ribbon.image.url}}" alt=""></a>
+                <a href="{% url 'ribbon-create' ribbon.id %}"><img src="{{ribbon.imageUrl}}" alt=""></a>
                 <div class="options flex fd-col">
                     <p>{{ribbon.ribbon_name}}</p>
                     <div class="flex jc-sb actions">

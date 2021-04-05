@@ -8,6 +8,7 @@ from django.views.generic.edit import CreateView, FormView, DeleteView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import UserCreationForm
@@ -64,7 +65,7 @@ class OrderInfoCreate(CreateView):
         return context
 
 
-class OrderInfoList(ListView):
+class OrderInfoList(LoginRequiredMixin, ListView):
     model = OrderInfo
     context_object_name = 'orderinfos'
 
@@ -74,12 +75,12 @@ class OrderInfoList(ListView):
         return context
 
 
-class OrderInfoDetail(DetailView):
+class OrderInfoDetail(LoginRequiredMixin, DetailView):
     model = OrderInfo
     context_object_name = 'orderinfo'
 
 
-class RibbonAPI(APIView):
+class RibbonAPI(LoginRequiredMixin, APIView):
     def create_or_update_order_item(self, ribbon_id, pk):
         preorder = PreOrder.objects.get(id=pk)
         ribbon = Ribbon.objects.get(id=ribbon_id)
@@ -122,7 +123,7 @@ class RibbonAPI(APIView):
         return Response({'item_quantity':preorder.get_quantity_total})
 
 
-class CartPage(CreateView):
+class CartPage(LoginRequiredMixin, CreateView):
     form_class = OrderInfoForm
     template_name = 'ribbon/cart_page.html'
     success_url = reverse_lazy('index')
@@ -135,7 +136,7 @@ class CartPage(CreateView):
             orderitem.save()
         orderinfo.order_total = orderinfo.get_order_total
         orderinfo.save()
-        success_message(request, orderinfo.id)# pops on index page
+        success_message(request, orderinfo.id)# pops on index page 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -157,7 +158,7 @@ class CartPage(CreateView):
             return self.form_valid(form)
 
 
-class DeletePreorder(DeleteView):
+class DeletePreorder(LoginRequiredMixin, DeleteView):
     model = PreOrder
     context_object_name = 'preorder'
     success_url = reverse_lazy('index')

@@ -22,3 +22,5 @@ class OrderInfoForm(ModelForm):
             'region',
             'zip_code',
         ]
+
+        

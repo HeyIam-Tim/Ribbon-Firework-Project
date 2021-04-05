@@ -1,5 +1,5 @@
 {% extends 'ribbon/base.html' %}
-
+{% block title %}Заказ{% endblock title %}
 {% block content %}
     <section class="orderinfo-detail">
         <h2>Заказ номер: {{orderinfo.id}}</h2>
@@ -13,7 +13,7 @@
             </div>
             {% for orderitem in orderinfo.orderitem_set.all %}
                 <div class="flex fd-row jc-se">
-                    <img src="{{orderitem.image.url}}" alt="ribbon_image">
+                    <img src="{{orderitem.imageUrl}}" alt="ribbon_image">
                     <p>{{orderitem.ribbon_name}}</p> 
                     <p>{{orderitem.price}}p</p> 
                     <p>{{orderitem.quantity}}</p> 
@@ -37,3 +37,4 @@
         </div>
     </section>
 {% endblock content %}
+
