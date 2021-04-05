@@ -1,2 +1,5 @@
-/scss
+.env
+.DS_Store
+scss/
 __pycache__/
+
