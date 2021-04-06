@@ -22,6 +22,13 @@ The link: https://ribbon-firework.herokuapp.com/
 
 ## Order Detail Page.
 
-<img alt='List of orders page.' src="https://github.com/HeyIam-Tim/Ribbon-Heroku/blob/master/static/images/detailorder.png">
+<img alt='Order Detail page.' src="https://github.com/HeyIam-Tim/Ribbon-Heroku/blob/master/static/images/detailorder.png">
+<br><br><br>
+
+## Login and Register pages.
+
+<img alt='Login Page.' src="https://github.com/HeyIam-Tim/Ribbon-Heroku/blob/master/static/images/login.png">
+<br><br><br>
+<img alt='Register page.' src="https://github.com/HeyIam-Tim/Ribbon-Heroku/blob/master/static/images/register.png">
 <br><br><br>
 
