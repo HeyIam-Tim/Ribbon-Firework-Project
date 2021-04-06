@@ -29,6 +29,6 @@ The link: https://ribbon-firework.herokuapp.com/
 
 <img alt='Login Page.' src="https://github.com/HeyIam-Tim/Ribbon-Heroku/blob/master/static/images/login.png">
 <br><br><br>
-<img alt='Register page.' src="https://github.com/HeyIam-Tim/Ribbon-Heroku/blob/master/static/images/register.png">
+<img alt='Register page.' src="https://github.com/HeyIam-Tim/Ribbon-Heroku/blob/master/static/images/register-page.png">
 <br><br><br>
 
