@@ -9,7 +9,9 @@ Solved problems:
 1. The owner no longer need to get customers' orders manually writing down on the paper.
 2. Increased salings on 30%.
 3. Convenient data, the owner has customers' data and products' data in one place.
-
+<br><br>
+Used technologies: Django, HTML, SASS, Vanilla JavaScript, Django REST Framework, AWS s3 bucket, Postgres, Heroku.
+<br><br>
 ## Index Page.
 
 <img alt='Index page.' src="https://github.com/HeyIam-Tim/Ribbon-Heroku/blob/master/static/images/index-page.png">
